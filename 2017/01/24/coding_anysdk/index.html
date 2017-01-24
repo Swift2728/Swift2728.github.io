@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,jinja2," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="从 Coding.net 抓取AnySDK插件列表，并保存为导航网页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抓取 Coding.net 项目，生成导航页面">
+<meta property="og:url" content="http://127.0.0.1/2017/01/24/coding_anysdk/index.html">
+<meta property="og:site_name" content="swift2728">
+<meta property="og:description" content="从 Coding.net 抓取AnySDK插件列表，并保存为导航网页">
+<meta property="og:image" content="http://127.0.0.1/coding_anysdk/img_fiddler_coding_anysdk.jpg">
+<meta property="og:updated_time" content="2017-01-24T08:07:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抓取 Coding.net 项目，生成导航页面">
+<meta name="twitter:description" content="从 Coding.net 抓取AnySDK插件列表，并保存为导航网页">
+<meta name="twitter:image" content="http://127.0.0.1/coding_anysdk/img_fiddler_coding_anysdk.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://127.0.0.1/2017/01/24/coding_anysdk/"/>
+
+
+
+
+
+  <title> 抓取 Coding.net 项目，生成导航页面 | swift2728 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">swift2728</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/01/24/coding_anysdk/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="swift2728">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/local/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="swift2728">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                抓取 Coding.net 项目，生成导航页面
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-24T16:58:00+08:00">
+                2017-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/24/coding_anysdk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/24/coding_anysdk/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+              <div class="post-description">
+                  从 Coding.net 抓取AnySDK插件列表，并保存为导航网页
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因为<a href="https://coding.net" target="_blank" rel="external">Coding.net</a> 并没有提供项目搜索功能。如果类似于 AnySDK 这种开源的，几百个子项目的主页而言，查找是一个灾难。<br>因此本文尝试一下抓取 <a href="https://coding.net/u/AnySDK" target="_blank" rel="external">Coding-AnySDK</a> 页面的项目，并生成一个导航页面，方便本地进行查找。</p>
+<h2 id="抓包分析"><a href="#抓包分析" class="headerlink" title="抓包分析"></a>抓包分析</h2><h3 id="抓取AnySDK主页"><a href="#抓取AnySDK主页" class="headerlink" title="抓取AnySDK主页"></a>抓取AnySDK主页</h3><p>使用 Fiddler 工具进行抓包。浏览器中访问 <a href="https://coding.net/u/AnySDK" target="_blank" rel="external">https://coding.net/u/AnySDK</a> , 启动 Fiddler，观察结果:<br><img src="/coding_anysdk/img_fiddler_coding_anysdk.jpg" alt="Fiddler AnySDK"><br>从截图中可以分析到，Coding请求项目的接口为：<br><code><a href="https://coding.net/api/user/AnySDK/public_projects?page=1&amp;pageSize=10&amp;type=joined" target="_blank" rel="external">https://coding.net/api/user/AnySDK/public_projects?page=1&amp;pageSize=10&amp;type=joined</a></code></p>
+<h3 id="获取接口返回"><a href="#获取接口返回" class="headerlink" title="获取接口返回"></a>获取接口返回</h3><p>使用 Postman 工具来查看接口情况，发现这个接口可用，其中<code>page</code>和<code>pageSize</code>参数控制着分页。<br>查看简单的数据格式（删除了大部分字段）：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"list"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"created_at"</span>: <span class="number">1485238100000</span>,</div><div class="line">                <span class="attr">"description"</span>: <span class="string">"溪谷sdk"</span>,</div><div class="line">                <span class="attr">"git_url"</span>: <span class="string">"git://git.coding.net/AnySDK/vlcmssdk.git"</span>,</div><div class="line">                <span class="attr">"ssh_url"</span>: <span class="string">"git@git.coding.net:AnySDK/vlcmssdk.git"</span>,</div><div class="line">                <span class="attr">"svn_url"</span>: <span class="string">"svn+ssh://svn@svn.coding.net/AnySDK/vlcmssdk"</span>,</div><div class="line">                <span class="attr">"is_public"</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">"https_url"</span>: <span class="string">"https://git.coding.net/AnySDK/vlcmssdk.git"</span>,</div><div class="line">                <span class="attr">"id"</span>: <span class="number">791045</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"vlcmssdk"</span>,</div><div class="line">                <span class="attr">"owner_id"</span>: <span class="number">88860</span>,</div><div class="line">                <span class="attr">"owner_user_name"</span>: <span class="string">"AnySDK"</span>,</div><div class="line">                <span class="attr">"owner_user_home"</span>: <span class="string">"&lt;a href=\"https://coding.net/u/AnySDK\"&gt;AnySDK&lt;/a&gt;"</span>,</div><div class="line">                <span class="attr">"project_path"</span>: <span class="string">"/u/AnySDK/p/vlcmssdk"</span>,</div><div class="line">                <span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"type"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"updated_at"</span>: <span class="number">1485238100000</span>,</div><div class="line">                <span class="attr">"last_updated"</span>: <span class="number">1485238109000</span>,</div><div class="line">                <span class="attr">"fork_count"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"star_count"</span>: <span class="number">0</span>,</div><div class="line">                <span class="attr">"watch_count"</span>: <span class="number">0</span>,</div><div class="line">                <span class="attr">"pin"</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">"depot_path"</span>: <span class="string">"/u/AnySDK/p/vlcmssdk/git"</span>,</div><div class="line">                <span class="attr">"forked"</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">"icon"</span>: <span class="string">"/static/project_icon/scenery-2.png"</span>,</div><div class="line">                <span class="attr">"current_user_role_id"</span>: <span class="number">0</span>,</div><div class="line">                <span class="attr">"parent_depot_path"</span>: <span class="string">"jcracker2/vlcmssdk"</span>,</div><div class="line">            &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"page"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"pageSize"</span>: <span class="number">10</span>,</div><div class="line">        <span class="attr">"totalPage"</span>: <span class="number">33</span>,</div><div class="line">        <span class="attr">"totalRow"</span>: <span class="number">326</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出返回结果是一个标准的json格式数据，那么很容易进行解析处理了</p>
+<h2 id="获取数据并解析"><a href="#获取数据并解析" class="headerlink" title="获取数据并解析"></a>获取数据并解析</h2><p>从上面分析这是一个标准的 GET请求，返回json数据格式的接口。<br>这里使用<code>python</code>来抓取数据。新建<code>fetch_coding_anysdk.py</code>, 封装成函数，方便分页遍历所有项目：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding( <span class="string">"utf-8"</span> )</div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> demjson</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page_data</span><span class="params">(cURL)</span>:</span></div><div class="line">    res = requests.get(cURL)</div><div class="line">    res.encoding = <span class="string">'utf-8'</span></div><div class="line"></div><div class="line">    data = []</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        json = demjson.decode(res.text)</div><div class="line">        list = json[<span class="string">"data"</span>][<span class="string">"list"</span>]</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> list:</div><div class="line">            data.append(&#123; </div><div class="line">                <span class="string">"url"</span>: item[<span class="string">"https_url"</span>], </div><div class="line">                <span class="string">"name"</span>: item[<span class="string">"name"</span>], </div><div class="line">                <span class="string">"desc"</span>: item[<span class="string">"description"</span>].encode(<span class="string">'utf-8'</span>), </div><div class="line">                <span class="string">"updatedAt"</span>: item[<span class="string">"last_updated"</span>]&#125;)</div><div class="line">    <span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</div><div class="line">        <span class="keyword">print</span> <span class="string">"read json data exception - "</span>, e</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"><span class="comment"># __main__</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:   </div><div class="line">    URL = <span class="string">"https://coding.net/api/user/AnySDK/public_projects?pageSize=10&amp;page="</span></div><div class="line"></div><div class="line">    datas = []  <span class="comment"># collect all items</span></div><div class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> xrange(<span class="number">1</span>, <span class="number">100</span>):</div><div class="line">        page = get_page_data(URL + str(index))</div><div class="line"></div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> page:</div><div class="line">            datas.append(item)</div><div class="line">        <span class="comment"># if page return size is 0, break</span></div><div class="line">        <span class="keyword">if</span> len(page) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="comment"># break</span></div><div class="line">   <span class="comment"># mark: we need output the text</span></div><div class="line">   <span class="keyword">print</span> datas</div></pre></td></tr></table></figure>
+<p>执行程序，就可以抓取到Coding AnySDK 主页上所有的项目了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ python fetch_coding_anysdk.py</div></pre></td></tr></table></figure></p>
+<p>接下来需要将数据写成一个html文件</p>
+<h2 id="生成-HTML-文件"><a href="#生成-HTML-文件" class="headerlink" title="生成 HTML 文件"></a>生成 HTML 文件</h2><p>生成html文件有很多种办法，这里采用 <code>Jinja2</code> 模板来生成 html 导航页:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">from</span> jinja2 <span class="keyword">import</span> Template</div><div class="line"></div><div class="line">template = Template(<span class="string">'''</span></div><div class="line">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;</div><div class="line">    &lt;title&gt;AnySDK Plugins&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;AnySDK Plugins List&lt;/h1&gt;</div><div class="line"></div><div class="line">    &lt;ul id="list"&gt;</div><div class="line">        &#123;% for item in plugins %&#125;</div><div class="line">        &lt;li&gt;&lt;p style="font-size:16px;"&gt;&lt;a href="&#123;&#123; item.url &#125;&#125;" &gt;&#123;&#123; item.name &#125;&#125;&lt;/a&gt;&amp;nbsp;&amp;nbsp;&#123;&#123; item.desc &#125;&#125;&lt;/p&gt;&lt;/li&gt;</div><div class="line">        &#123;% endfor %&#125;</div><div class="line">    &lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">''')</div><div class="line"></div><div class="line"><span class="comment"># mark: we need output the text</span></div><div class="line">text = template.render(plugins=datas)</div><div class="line"></div><div class="line"><span class="keyword">print</span> text</div></pre></td></tr></table></figure></p>
+<p>在上面的脚本中增加<code>Jinja2</code>模板的渲染， 打印到控制台。然后使用管道进行生成文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ python fetch_coding_anysdk.py &gt; file_coding_anysdk.html</div></pre></td></tr></table></figure></p>
+<p>THE END</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/jinja2/" rel="tag"># jinja2</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/01/hello_world/" rel="next" title="Hello - Hexo">
+                <i class="fa fa-chevron-left"></i> Hello - Hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/24/coding_anysdk/"
+           data-title="抓取 Coding.net 项目，生成导航页面" data-url="http://127.0.0.1/2017/01/24/coding_anysdk/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/local/avatar.jpg"
+               alt="swift2728" />
+          <p class="site-author-name" itemprop="name">swift2728</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抓包分析"><span class="nav-number">1.</span> <span class="nav-text">抓包分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抓取AnySDK主页"><span class="nav-number">1.1.</span> <span class="nav-text">抓取AnySDK主页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取接口返回"><span class="nav-number">1.2.</span> <span class="nav-text">获取接口返回</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取数据并解析"><span class="nav-number">2.</span> <span class="nav-text">获取数据并解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成-HTML-文件"><span class="nav-number">3.</span> <span class="nav-text">生成 HTML 文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">swift2728</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swift2728"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
