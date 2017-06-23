@@ -1,0 +1,735 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="server,kv," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Consul简单介绍，以及KV存储实现的动态配置">
+<meta name="keywords" content="server,kv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consul简介 及 KV存储">
+<meta property="og:url" content="http://127.0.0.1/2017/06/12/consul_kv/index.html">
+<meta property="og:site_name" content="swift2728">
+<meta property="og:description" content="Consul简单介绍，以及KV存储实现的动态配置">
+<meta property="og:image" content="http://127.0.0.1/consul_kv/consul-arch.png">
+<meta property="og:updated_time" content="2017-06-22T10:23:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Consul简介 及 KV存储">
+<meta name="twitter:description" content="Consul简单介绍，以及KV存储实现的动态配置">
+<meta name="twitter:image" content="http://127.0.0.1/consul_kv/consul-arch.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://127.0.0.1/2017/06/12/consul_kv/"/>
+
+
+
+
+
+  <title> Consul简介 及 KV存储 | swift2728 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">swift2728</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/12/consul_kv/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="swift2728">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/local/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="swift2728">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Consul简介 及 KV存储
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-12T21:05:00+08:00">
+                2017-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/12/consul_kv/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/12/consul_kv/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+              <div class="post-description">
+                  Consul简单介绍，以及KV存储实现的动态配置
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="用途及架构"><a href="#用途及架构" class="headerlink" title="用途及架构"></a>用途及架构</h2><p><a href="https://www.consul.io/intro/index.html" target="_blank" rel="external"><code>Consul</code></a> 是一个支持多数据中心、分布式高可用的服务发现和配置共享的软件。包括如下几个部分：<br><code>Service Discovery</code>, <code>Health Checking</code>, <code>KV Store</code>, <code>Multi Datacenter</code>.</p>
+<p><code>Consul Architecture</code><br><img src="/consul_kv/consul-arch.png" alt="Consul arch"></p>
+<h2 id="服务安装、配置"><a href="#服务安装、配置" class="headerlink" title="服务安装、配置"></a>服务安装、配置</h2><p><a href="https://www.consul.io/intro/getting-started/install.html" target="_blank" rel="external">安装和配置文档</a></p>
+<h2 id="Consul-KV"><a href="#Consul-KV" class="headerlink" title="Consul KV"></a>Consul KV</h2><p><code>Values in the KV store cannot be larger than 512kb.</code></p>
+<h3 id="Consul-KV-HTTP-API"><a href="#Consul-KV-HTTP-API" class="headerlink" title="Consul KV HTTP API"></a><a href="https://www.consul.io/api/kv.html" target="_blank" rel="external">Consul KV HTTP API</a></h3><p>使用HTTP请求进行KV操作。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">URL = 'http:localhost:8500'</div><div class="line"><span class="meta">#</span> 1. Read key</div><div class="line">curl URL/v1/kv/my-key </div><div class="line"><span class="meta">#</span># curl localhost:8500/v1/kv/app/123</div><div class="line"><span class="meta"></span></div><div class="line"># 2. Create/Update key</div><div class="line">curl \</div><div class="line">    --request PUT \</div><div class="line">    --data @content \</div><div class="line">    URL/v1/kv/my-key</div><div class="line"><span class="meta">#</span># curl --request PUT --data 'app/123' localhost:8500/v1/kv/app/123    </div><div class="line"><span class="meta"></span></div><div class="line"># 3. Delete key</div><div class="line">curl \</div><div class="line">    --request DELETE</div><div class="line">    URL/v1/kv/my-key</div><div class="line"><span class="meta">#</span># curl --request DELETE localhost:8500/v1/kv/app/123    </div><div class="line"><span class="meta"></span></div><div class="line"># 4. 实用命令</div><div class="line"><span class="meta">#</span># 查询所有的key</div><div class="line">curl URL/v1/kv/?keys</div><div class="line"><span class="meta">#</span># 查询所有指定前缀的key</div><div class="line">curl URL/v1/kv/xx/?keys</div><div class="line"><span class="meta">#</span># 查询指定的key</div><div class="line">curl URL/v1/kv/my-key</div><div class="line"><span class="meta">#</span># 查询所有的key-value</div><div class="line">curl URL/v1/kv/?recurse</div></pre></td></tr></table></figure></p>
+<p>顺便补充知识点<code>curl</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--request PUT   -&gt;  -X PUT</div><div class="line">--data ''       -&gt;  -d ''</div><div class="line">--header ''     -&gt;  -H ''</div></pre></td></tr></table></figure></p>
+<h3 id="Consul-KV-CLI"><a href="#Consul-KV-CLI" class="headerlink" title="Consul KV CLI"></a><a href="https://www.consul.io/docs/commands/kv.html" target="_blank" rel="external">Consul KV CLI</a></h3><p>在命令行情况下进行KV操作。<br>使用帮助文档进行查看：<code>./consul kv --help</code>, <code>./consul kv get --help</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">mjyun:tools gaolian$ ./consul kv --help</div><div class="line">Usage: consul kv &lt;subcommand&gt; [options] [args]</div><div class="line"></div><div class="line">  This command has subcommands for interacting with Consul's key-value</div><div class="line">  store. Here are some simple examples, and more detailed examples are</div><div class="line">  available in the subcommands or the documentation.</div><div class="line"></div><div class="line">  Create or update the key named "redis/config/connections" with the value "5":</div><div class="line"></div><div class="line">      $ consul kv put redis/config/connections 5</div><div class="line"></div><div class="line">  Read this value back:</div><div class="line"></div><div class="line">      $ consul kv get redis/config/connections</div><div class="line"></div><div class="line">  Or get detailed key information:</div><div class="line"></div><div class="line">      $ consul kv get -detailed redis/config/connections</div><div class="line"></div><div class="line">  Finally, delete the key:</div><div class="line"></div><div class="line">      $ consul kv delete redis/config/connections</div><div class="line"></div><div class="line">  For more examples, ask for subcommand help or view the documentation.</div><div class="line"></div><div class="line">Subcommands:</div><div class="line">    delete    Removes data from the KV store</div><div class="line">    export    Exports a tree from the KV store as JSON</div><div class="line">    get       Retrieves or lists data from the KV store</div><div class="line">    import    Imports a tree stored as JSON to the KV store</div><div class="line">    put       Sets or updates data in the KV store</div></pre></td></tr></table></figure></p>
+<h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><p><code>Read</code> 操作支持:</p>
+<ul>
+<li><a href="https://www.consul.io/api/index.html#blocking-queries" target="_blank" rel="external"><code>Blocking Queries</code></a>   -&gt; YES</li>
+<li><a href="https://www.consul.io/api/index.html#consistency-modes" target="_blank" rel="external"><code>Consistency Modes</code></a> -&gt; all</li>
+<li><a href="https://www.consul.io/api/index.html#acls" target="_blank" rel="external"><code>ACL Required</code></a> -&gt; <code>key:read</code></li>
+</ul>
+<p><code>Create/Update, DELETE</code> 操作支持：</p>
+<ul>
+<li><a href="https://www.consul.io/api/index.html#blocking-queries" target="_blank" rel="external"><code>Blocking Queries</code></a>   -&gt; NO</li>
+<li><a href="https://www.consul.io/api/index.html#consistency-modes" target="_blank" rel="external"><code>Consistency Modes</code></a> -&gt; none</li>
+<li><a href="https://www.consul.io/api/index.html#acls" target="_blank" rel="external"><code>ACL Required</code></a> -&gt; <code>key:write</code></li>
+</ul>
+<p>关于<code>ACL Required</code>。每个端点都可以设置token访问，通过设置 header <code>X-Consul-Token</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> command line</div><div class="line">--header `X-Consul-Token:1234abcd`</div><div class="line"><span class="meta">#</span> http api</div><div class="line">?token=1234abcd</div></pre></td></tr></table></figure></p>
+<p>关于<code>Blocking Queries</code>。如果某个端点支持阻塞查询的话， 那么Http请求将会被<code>挂起/阻塞</code> 直到 <code>系统发送变化</code> 或 <code>设置的最大超时到来(默认5min)</code>。  </p>
+<h2 id="Consul-Web-UI"><a href="#Consul-Web-UI" class="headerlink" title="Consul Web UI"></a>Consul Web UI</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 启动consul服务</div><div class="line"><span class="meta">#</span># 在浏览器中打开页面: localhost:8500/ui</div><div class="line">consul agent -dev -data-dir=./ui</div></pre></td></tr></table></figure>
+<p>如果以 <code>-server</code> 模式去启动服务的话，则需要其他的配置</p>
+<p>THE END</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/server/" rel="tag"># server</a>
+          
+            <a href="/tags/kv/" rel="tag"># kv</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/03/android_adb_screenshot/" rel="next" title="Android PC 端截图，并保存到本地">
+                <i class="fa fa-chevron-left"></i> Android PC 端截图，并保存到本地
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/18/tools_item2_hotkey/" rel="prev" title="iTerm2 快捷键">
+                iTerm2 快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/12/consul_kv/"
+           data-title="Consul简介 及 KV存储" data-url="http://127.0.0.1/2017/06/12/consul_kv/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/local/avatar.jpg"
+               alt="swift2728" />
+          <p class="site-author-name" itemprop="name">swift2728</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用途及架构"><span class="nav-number">1.</span> <span class="nav-text">用途及架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务安装、配置"><span class="nav-number">2.</span> <span class="nav-text">服务安装、配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consul-KV"><span class="nav-number">3.</span> <span class="nav-text">Consul KV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Consul-KV-HTTP-API"><span class="nav-number">3.1.</span> <span class="nav-text">Consul KV HTTP API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consul-KV-CLI"><span class="nav-number">3.2.</span> <span class="nav-text">Consul KV CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关概念"><span class="nav-number">3.3.</span> <span class="nav-text">相关概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consul-Web-UI"><span class="nav-number">4.</span> <span class="nav-text">Consul Web UI</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">swift2728</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swift2728"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

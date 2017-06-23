@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android,android_tools," />
+  <meta name="keywords" content="android,android_note," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="在PC端，使用命令进行手机截图，并保存到本地">
-<meta name="keywords" content="android,android_tools">
+<meta name="description" content="对ListView(AbsListView)的Item快速刷新导致点击事件的阻塞解决办法">
+<meta name="keywords" content="android,android_note">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android PC 端截图，并保存到本地">
-<meta property="og:url" content="http://127.0.0.1/2017/02/03/android_adb_screenshot/index.html">
+<meta property="og:title" content="ListAdapter 刷新对事件的阻塞">
+<meta property="og:url" content="http://127.0.0.1/2017/06/22/android_listadapter/index.html">
 <meta property="og:site_name" content="swift2728">
-<meta property="og:description" content="在PC端，使用命令进行手机截图，并保存到本地">
-<meta property="og:updated_time" content="2017-06-22T09:47:41.000Z">
+<meta property="og:description" content="对ListView(AbsListView)的Item快速刷新导致点击事件的阻塞解决办法">
+<meta property="og:updated_time" content="2017-06-23T06:18:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android PC 端截图，并保存到本地">
-<meta name="twitter:description" content="在PC端，使用命令进行手机截图，并保存到本地">
+<meta name="twitter:title" content="ListAdapter 刷新对事件的阻塞">
+<meta name="twitter:description" content="对ListView(AbsListView)的Item快速刷新导致点击事件的阻塞解决办法">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://127.0.0.1/2017/02/03/android_adb_screenshot/"/>
+  <link rel="canonical" href="http://127.0.0.1/2017/06/22/android_listadapter/"/>
 
 
 
 
 
-  <title> Android PC 端截图，并保存到本地 | swift2728 </title>
+  <title> ListAdapter 刷新对事件的阻塞 | swift2728 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/02/03/android_adb_screenshot/">
+  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/22/android_listadapter/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="swift2728">
@@ -275,7 +275,7 @@
             
             
               
-                Android PC 端截图，并保存到本地
+                ListAdapter 刷新对事件的阻塞
               
             
           </h1>
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-03T17:58:00+08:00">
-                2017-02-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-22T17:06:00+08:00">
+                2017-06-22
               </time>
             
 
@@ -331,8 +331,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/03/android_adb_screenshot/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/03/android_adb_screenshot/" itemprop="commentCount"></span>
+                <a href="/2017/06/22/android_listadapter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/22/android_listadapter/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -347,7 +347,7 @@
 
           
               <div class="post-description">
-                  在PC端，使用命令进行手机截图，并保存到本地
+                  对ListView(AbsListView)的Item快速刷新导致点击事件的阻塞解决办法
               </div>
           
 
@@ -362,19 +362,11 @@
       
 
       
-        <p>在开发调试过程中，有时候需要对手机进行截图操作，但碍于各个手机助手复杂流程，特此整理命令行下截图相关的功能。  </p>
-<h2 id="截图操作分析"><a href="#截图操作分析" class="headerlink" title="截图操作分析"></a>截图操作分析</h2><p>命令行下截图操作，保存到本地。其实可以拆分如下几个步骤：</p>
-<ul>
-<li>使用adb命令进行截图，保存到SD卡上</li>
-<li>把截图pull到PC上</li>
-<li>删除原来的截图文件</li>
-</ul>
-<h2 id="截图步骤"><a href="#截图步骤" class="headerlink" title="截图步骤"></a>截图步骤</h2><p>上述的几个步骤都有相关的adb命令进行操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># adb命令截图，并保存到SD卡</div><div class="line">adb shell screencpp -p [file_name]</div><div class="line"></div><div class="line"># 把截图文件pull到PC上</div><div class="line">adb pull [file_name] [path/out_name]</div><div class="line"></div><div class="line"># 删除SD卡截图文件</div><div class="line">adb shell rm [file_name]</div></pre></td></tr></table></figure></p>
-<p>将上述的步骤整理成一个脚本<br>创建脚本<code>adbshot.sh</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>! /bin/sh</div><div class="line"></div><div class="line">time=`date +%s`</div><div class="line">file_name="/sdcard/$time.png"</div><div class="line"></div><div class="line">adb shell screencap -p $file_name</div><div class="line">out_name="$time.png"</div><div class="line">if [ $# == 1 ]</div><div class="line">then</div><div class="line">    out_name=$1</div><div class="line">fi</div><div class="line">adb pull $file_name ./$out_name</div><div class="line">adb shell rm $file_name</div></pre></td></tr></table></figure></p>
-<p>截图的时候，默认使用时间戳作为保存的文件名</p>
-<p>执行脚本：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh adbshot.sh [xx.png]</div></pre></td></tr></table></figure></p>
-<h2 id="创建-alias，-加入到path中"><a href="#创建-alias，-加入到path中" class="headerlink" title="创建 alias， 加入到path中"></a>创建 alias， 加入到path中</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> in .bash_profile</div><div class="line">alias adbshot="sh /Users/[admin]/tools/adbshot.sh"</div></pre></td></tr></table></figure>
-<p>使用alias执行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adbshot Huawei.png</div></pre></td></tr></table></figure></p>
+        <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在<code>ListView</code>的<code>Item</code>中，包含有<code>ProgressBar</code>（用于刷新进度）和<code>ImageView</code>（用于处理点击事件），通过<code>mAdapter.notifyDataSetChanged()</code>来刷新进度数据。<br>当数据刷新过快的时候，遇到了一个问题是<code>ImageView</code>设置事件的<strong>“失灵”</strong>。</p>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p><code>AbsListView</code>是通过<code>mAdapter.notifyDataSetChanged</code>进行UI更新的，但是这样会造成<code>AbsListView</code>频繁的重绘(Item数量很多的时候尤其明显），导致事件处理方面出现异常，被阻塞了。  </p>
+<h2 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h2><p>既然阻塞是因为频繁的更新UI导致的， 那么解决的办法就是降低UI的更新频率。我们只需更新部分Item的UI，对于不可见的Item，是无需处理的。所以不需要进行<code>notifyDataSetChanged</code>这种重级别的更新操作了。只需要改变<code>ProgressBar</code>或 <code>TextView</code>的内容就行。</p>
+<p>为了达到这个目的， 我们可以使用<code>HashMap&lt;Integer, ViewHolder&gt;</code>来存储当前显示在UI界面上的Item，在<code>getView(···)</code>中进行<code>put(position, holder)</code>操作。在需要更新的时候调用函数<code>updateProgress(int pos)</code>进行更新进度。</p>
+<p>对应的Java代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 用于存储Integer与ViewHolder的值，用于更新进度</span></div><div class="line">    <span class="keyword">private</span> HashMap&lt;Integer, ViewHolder&gt; hmap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 更新指定位置的进度</div><div class="line">     * <span class="doctag">@param</span> position Item的序列值</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateProgress</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        ViewHolder holder = hmap.get(position);</div><div class="line">        <span class="keyword">if</span>(holder!=<span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">final</span> AppExtractBean itemBean = (AppExtractBean) getItem(position);</div><div class="line">            <span class="keyword">int</span> progress = itemBean.getProgress();</div><div class="line">            holder.tvPbState.setText(progress + <span class="string">"%"</span>);</div><div class="line">            holder.progressBar.setProgress(progress);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            Log.e(<span class="string">"DownTask"</span>, <span class="string">"hmap[%s] -&gt; holder is null"</span>, position);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">     <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</div><div class="line">        ViewHolder holder;</div><div class="line">        <span class="keyword">if</span> (convertView == <span class="keyword">null</span>) &#123;</div><div class="line">            convertView = inflator.inflate(R.layout.xxx, parent, <span class="keyword">false</span>);</div><div class="line">            holder = <span class="keyword">new</span> ViewHolder();</div><div class="line">           </div><div class="line">            holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressbar);</div><div class="line">            holder.tvPbState = (TextView) convertView.findViewById(R.id.tv_progress_state);</div><div class="line">        </div><div class="line">            holder.progressBar.setMax(<span class="number">100</span>);</div><div class="line">            convertView.setTag(holder);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            holder = (ViewHolder) convertView.getTag();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 更新当前显示UI的引用</span></div><div class="line">        hmap.put(position, holder);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>THE END</p>
 
       
@@ -401,7 +393,7 @@
           
             <a href="/tags/android/" rel="tag"># android</a>
           
-            <a href="/tags/android-tools/" rel="tag"># android_tools</a>
+            <a href="/tags/android-note/" rel="tag"># android_note</a>
           
         </div>
       
@@ -410,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/24/coding_anysdk/" rel="next" title="抓取 Coding.net 项目，生成导航页面">
-                <i class="fa fa-chevron-left"></i> 抓取 Coding.net 项目，生成导航页面
+              <a href="/2017/06/18/tools_item2_hotkey/" rel="next" title="iTerm2 快捷键">
+                <i class="fa fa-chevron-left"></i> iTerm2 快捷键
               </a>
             
           </div>
@@ -419,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/12/consul_kv/" rel="prev" title="Consul简介 及 KV存储">
-                Consul简介 及 KV存储 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -448,8 +436,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/03/android_adb_screenshot/"
-           data-title="Android PC 端截图，并保存到本地" data-url="http://127.0.0.1/2017/02/03/android_adb_screenshot/">
+      <div class="ds-thread" data-thread-key="2017/06/22/android_listadapter/"
+           data-title="ListAdapter 刷新对事件的阻塞" data-url="http://127.0.0.1/2017/06/22/android_listadapter/">
       </div>
     
   </div>
@@ -549,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#截图操作分析"><span class="nav-number">1.</span> <span class="nav-text">截图操作分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截图步骤"><span class="nav-number">2.</span> <span class="nav-text">截图步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-alias，-加入到path中"><span class="nav-number">3.</span> <span class="nav-text">创建 alias， 加入到path中</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理办法"><span class="nav-number">3.</span> <span class="nav-text">处理办法</span></a></li></ol></div>
             
 
           </div>
