@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,8 +13,17 @@
 
 
 
+
+
+
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -65,7 +74,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -97,8 +106,8 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -123,54 +132,60 @@
 
 
 
-  <title> swift2728 </title>
+  <title>swift2728</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
-
-
-
-
-
-
-
-
-
-
-  
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">swift2728</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">swift2728</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-    
-      <p class="site-subtitle"></p>
-    
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -190,18 +205,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -211,7 +216,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -248,20 +253,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/22/android_listadapter/">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/22/android_listadapter/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="swift2728">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/local/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="swift2728">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="swift2728">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="swift2728">
+    </span>
 
     
       <header class="post-header">
@@ -269,16 +271,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/22/android_listadapter/" itemprop="url">
-                  ListAdapter 刷新对事件的阻塞
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/22/android_listadapter/" itemprop="url">ListAdapter 刷新对事件的阻塞</a></h1>
         
 
         <div class="post-meta">
@@ -290,7 +284,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-22T17:06:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T17:06:00+08:00">
                 2017-06-22
               </time>
             
@@ -326,21 +320,11 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/22/android_listadapter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/22/android_listadapter/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
-
           
+
           
 
           
@@ -351,7 +335,6 @@
       </header>
     
 
-
     <div class="post-body" itemprop="articleBody">
 
       
@@ -361,7 +344,7 @@
         
           对ListView(AbsListView)的Item快速刷新导致点击事件的阻塞解决办法
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2017/06/22/android_listadapter/">
               阅读全文 &raquo;
             </a>
@@ -379,8 +362,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -403,20 +391,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/18/tools_item2_hotkey/">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/18/tools_item2_hotkey/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="swift2728">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/local/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="swift2728">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="swift2728">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="swift2728">
+    </span>
 
     
       <header class="post-header">
@@ -424,16 +409,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/18/tools_item2_hotkey/" itemprop="url">
-                  iTerm2 快捷键
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/18/tools_item2_hotkey/" itemprop="url">iTerm2 快捷键</a></h1>
         
 
         <div class="post-meta">
@@ -445,7 +422,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-18T22:23:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T22:23:00+08:00">
                 2017-06-18
               </time>
             
@@ -481,21 +458,11 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/18/tools_item2_hotkey/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/18/tools_item2_hotkey/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
-
           
+
           
 
           
@@ -506,7 +473,6 @@
       </header>
     
 
-
     <div class="post-body" itemprop="articleBody">
 
       
@@ -516,7 +482,7 @@
         
           OSX iTerm2 常用快捷键
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2017/06/18/tools_item2_hotkey/">
               阅读全文 &raquo;
             </a>
@@ -534,8 +500,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -558,20 +529,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/12/consul_kv/">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/12/consul_kv/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="swift2728">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/local/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="swift2728">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="swift2728">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="swift2728">
+    </span>
 
     
       <header class="post-header">
@@ -579,16 +547,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/12/consul_kv/" itemprop="url">
-                  Consul简介 及 KV存储
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/12/consul_kv/" itemprop="url">Consul简介 及 KV存储</a></h1>
         
 
         <div class="post-meta">
@@ -600,7 +560,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-12T21:05:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-12T21:05:00+08:00">
                 2017-06-12
               </time>
             
@@ -636,21 +596,11 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/12/consul_kv/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/12/consul_kv/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
-
           
+
           
 
           
@@ -661,7 +611,6 @@
       </header>
     
 
-
     <div class="post-body" itemprop="articleBody">
 
       
@@ -671,7 +620,7 @@
         
           Consul简单介绍，以及KV存储实现的动态配置
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2017/06/12/consul_kv/">
               阅读全文 &raquo;
             </a>
@@ -689,8 +638,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -713,20 +667,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/02/03/android_adb_screenshot/">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/02/03/android_adb_screenshot/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="swift2728">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/local/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="swift2728">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="swift2728">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="swift2728">
+    </span>
 
     
       <header class="post-header">
@@ -734,16 +685,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/03/android_adb_screenshot/" itemprop="url">
-                  Android PC 端截图，并保存到本地
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/03/android_adb_screenshot/" itemprop="url">Android PC 端截图，并保存到本地</a></h1>
         
 
         <div class="post-meta">
@@ -755,7 +698,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-03T17:58:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-03T17:58:00+08:00">
                 2017-02-03
               </time>
             
@@ -791,21 +734,11 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/03/android_adb_screenshot/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/03/android_adb_screenshot/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
-
           
+
           
 
           
@@ -816,7 +749,6 @@
       </header>
     
 
-
     <div class="post-body" itemprop="articleBody">
 
       
@@ -826,7 +758,7 @@
         
           在PC端，使用命令进行手机截图，并保存到本地
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2017/02/03/android_adb_screenshot/">
               阅读全文 &raquo;
             </a>
@@ -844,8 +776,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -868,20 +805,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/01/24/coding_anysdk/">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/01/24/coding_anysdk/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="swift2728">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/local/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="swift2728">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="swift2728" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="swift2728">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="swift2728">
+    </span>
 
     
       <header class="post-header">
@@ -889,16 +823,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/01/24/coding_anysdk/" itemprop="url">
-                  抓取 Coding.net 项目，生成导航页面
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/01/24/coding_anysdk/" itemprop="url">抓取 Coding.net 项目，生成导航页面</a></h1>
         
 
         <div class="post-meta">
@@ -910,7 +836,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-24T16:58:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-24T16:58:00+08:00">
                 2017-01-24
               </time>
             
@@ -946,21 +872,11 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/24/coding_anysdk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/24/coding_anysdk/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
-
           
+
           
 
           
@@ -971,7 +887,6 @@
       </header>
     
 
-
     <div class="post-body" itemprop="articleBody">
 
       
@@ -981,7 +896,7 @@
         
           从 Coding.net 抓取AnySDK插件列表，并保存为导航网页
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2017/01/24/coding_anysdk/">
               阅读全文 &raquo;
             </a>
@@ -999,8 +914,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1047,16 +967,18 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/local/avatar.jpg"
+               src="/images/avatar.gif"
                alt="swift2728" />
           <p class="site-author-name" itemprop="name">swift2728</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-        
+
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives">
+              <a href="/archives/">
                 <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -1064,6 +986,8 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">4</span>
@@ -1073,11 +997,13 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              
                 <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
-              </a>
+              
             </div>
           
 
@@ -1099,6 +1025,8 @@
 
 
       </section>
+
+      
 
       
 
@@ -1130,7 +1058,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
@@ -1141,9 +1069,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1163,6 +1095,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1188,63 +1129,73 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"swift2728"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
-
-
-
-
-
-
-
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
   
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -1252,6 +1203,11 @@
 
   
 
+  
+
+  
+
+  
 
 </body>
 </html>
