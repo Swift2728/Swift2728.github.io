@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tools,git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Git 常用操作">
+<meta name="keywords" content="tools,git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 常用操作">
+<meta property="og:url" content="http://127.0.0.1/2017/06/28/tools_git/index.html">
+<meta property="og:site_name" content="swift2728">
+<meta property="og:description" content="Git 常用操作">
+<meta property="og:updated_time" content="2017-06-28T13:42:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 常用操作">
+<meta name="twitter:description" content="Git 常用操作">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://127.0.0.1/2017/06/28/tools_git/"/>
+
+
+
+
+
+  <title>Git 常用操作 | swift2728</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">swift2728</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/2017/06/28/tools_git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="swift2728">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="swift2728">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git 常用操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T20:07:00+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Git 常用操作
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Git-提交步骤"><a href="#Git-提交步骤" class="headerlink" title="Git 提交步骤"></a>Git 提交步骤</h2><p>提交一般分为如下几个步骤</p>
+<h3 id="查看文件状态"><a href="#查看文件状态" class="headerlink" title="查看文件状态"></a>查看文件状态</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure>
+<p>一般有如下结果：</p>
+<ul>
+<li>已暂存（changes to be committed【green】）<br>  new file, modified, deleted</li>
+<li>已修改（changed but not updated【red】）<br>  modified, deleted</li>
+<li>未跟踪（untracked file）</li>
+</ul>
+<h3 id="查看修改内容"><a href="#查看修改内容" class="headerlink" title="查看修改内容"></a>查看修改内容</h3><p>比较某个文件与最近提交节点的差异。如果该文件已暂存，那么需要加上参数<code>-cached</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git diff &lt;file&gt;</div><div class="line"><span class="meta">#</span> 详细的查看修改还有</div><div class="line">git diff &lt;hashcode&gt; &lt;hashcode&gt; &lt;file&gt;</div><div class="line">git diff &lt;branch1&gt; &lt;branch2&gt; &lt;file&gt; </div><div class="line">git diff &lt;branch&gt; &lt;hashcode&gt; &lt;file&gt;</div><div class="line"><span class="meta">#</span> 如果两个文件名不一样</div><div class="line">git diff &lt;branch1&gt;:./relative/path/aa.txt &lt;branch2&gt;:./relative/path/ab.txt</div></pre></td></tr></table></figure></p>
+<h3 id="暂存提交的文件"><a href="#暂存提交的文件" class="headerlink" title="暂存提交的文件"></a>暂存提交的文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> new file, modify</div><div class="line">git add &lt;file&gt;</div><div class="line"><span class="meta">#</span> delete</div><div class="line">git rm &lt;file&gt;</div></pre></td></tr></table></figure>
+<h3 id="提交已暂存的文件"><a href="#提交已暂存的文件" class="headerlink" title="提交已暂存的文件"></a>提交已暂存的文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 注释填写规范</div><div class="line">git commit [file|folder] -m "commit note" </div><div class="line"><span class="meta">#</span> 修改最近一次提交，如果提交注释或漏提文件，使用此命令</div><div class="line">git commit [file|folder] -m "commit note" --amend</div></pre></td></tr></table></figure>
+<h3 id="同步到服务器"><a href="#同步到服务器" class="headerlink" title="同步到服务器"></a>同步到服务器</h3><p>一般在提交代码之前，需要从服务器同步以下代码到本地，防止冲突：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 将服务器代码同步到本地：</div><div class="line">git pull</div><div class="line"><span class="meta">#</span> 如果执行失败， 则按照提示还原冲突文件，然后再次尝试同步</div><div class="line">git checkout -- &lt;有冲突的文件路径&gt;</div></pre></td></tr></table></figure></p>
+<p>然后再同步到服务器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin &lt;本地分支名&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="Git-操作功能"><a href="#Git-操作功能" class="headerlink" title="Git 操作功能"></a>Git 操作功能</h2><h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git branch [-a] # -a: 包括远程所有分支</div><div class="line">git tag</div></pre></td></tr></table></figure>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>同步 branch：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> git fetch 只会讲本地库所关联的远程库的commit id更新至最新</div><div class="line">git fetch</div><div class="line"><span class="meta"></span></div><div class="line"># git pull 会将本地库更新至远程库的最新状态</div><div class="line"><span class="meta">#</span> git pull = git fetch + git merge。但是从commit id上看实际上不是这样。</div><div class="line">git pull</div><div class="line"><span class="meta"></span></div><div class="line"># clone某一个特定的远程分支</div><div class="line">git clone -b [branch_name] [remote_repository_address]</div></pre></td></tr></table></figure></p>
+<p>同步 tag：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git fetch origin</div></pre></td></tr></table></figure></p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>创建、重命名 branch：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git branch [branch_name]</div><div class="line"><span class="meta"></span></div><div class="line"># 重命名分支，如果newbranch分支已经存在，则使用-M, -m</div><div class="line">git branch [-m | -M] [oldbranch] [newbranch]</div></pre></td></tr></table></figure></p>
+<p>创建 tag：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>-a 是添加标签，后面要跟新的标签号; -m 以及后面是对该标签的注释</div><div class="line">git tag -a [tag_name] -m ["Release version tag_name"]</div></pre></td></tr></table></figure></p>
+<h3 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h3><p>对如branch，提交操作是相对于当前分支分支来说的。推送本地分支local_branch到远程分支remote_branch并建立关联关系。分如下情况：</p>
+<ul>
+<li><p>remote_branch 已存在，并且已经建立关联</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push</div></pre></td></tr></table></figure>
+</li>
+<li><p>remote_branch 已存在，但未建立关联</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin/remote_branch</div></pre></td></tr></table></figure>
+</li>
+<li><p>remote_branch 不存在</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin local_branch:remote_branch</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>提交 tag：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin --tags</div></pre></td></tr></table></figure></p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>删除本地：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git [branch|tag] -d [branch_name|tag_name]</div></pre></td></tr></table></figure></p>
+<p>删除远程：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git push origin :[branch_name|tag_name]</div><div class="line"><span class="meta"></span></div><div class="line"># extra: 删除远程branch_name</div><div class="line">git branch -d -r [branch_name]</div></pre></td></tr></table></figure></p>
+<h2 id="Git-实用技巧"><a href="#Git-实用技巧" class="headerlink" title="Git 实用技巧"></a>Git 实用技巧</h2><h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h3><p>checkout a branch a branch or paths to the working tree.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 切换到分支(创建分之后，并不会切换到分支): -b 切换</div><div class="line">git checkout [-b] [branch_name]</div><div class="line"><span class="meta"></span></div><div class="line"># 恢复到服务器版本</div><div class="line">git checkout [path]</div></pre></td></tr></table></figure></p>
+<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 回退所有内容到上一个版本</div><div class="line">git reset HEAD^</div><div class="line"><span class="meta"></span></div><div class="line"># 回退文件到上一个版本</div><div class="line">git reset HEAD^ [filename]</div><div class="line"><span class="meta"></span></div><div class="line"># 将本地状态回退到和远程的一样</div><div class="line">git reset --hard origin/master</div><div class="line"><span class="meta"></span></div><div class="line"># 回退到某个版本</div><div class="line">git reset [version]</div></pre></td></tr></table></figure>
+<h3 id="重命名远程分支"><a href="#重命名远程分支" class="headerlink" title="重命名远程分支"></a>重命名远程分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 重命名本地分支</div><div class="line">git branch -m | -M [oldbranch] [newbranch]</div><div class="line"></div><div class="line"># 推送到远程</div><div class="line">git push origin [newbranch]:[newbranch]</div><div class="line"></div><div class="line"># 删除远程旧分支</div><div class="line">git push origin :[oldbranch]</div></pre></td></tr></table></figure>
+<h3 id="删除远程，本地同步"><a href="#删除远程，本地同步" class="headerlink" title="删除远程，本地同步"></a>删除远程，本地同步</h3><p>远程分支已经删除了，但是本地还有记录。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>可以查看到某些状态是stale（陈旧的）</div><div class="line">git remtoe show origin </div><div class="line"><span class="meta">#</span> 可以使用如下任何一个命令：</div><div class="line">git remote prune origin # 删除远程不存在的跟踪分支</div><div class="line">git fetch -p            # fetch之后，删除远程不存在跟踪分支</div></pre></td></tr></table></figure></p>
+<h3 id="git-other"><a href="#git-other" class="headerlink" title="git other"></a>git other</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 查看文件的提交记录. (-p:包含了提交内容)</div><div class="line">git log [-p] [file_name]</div></pre></td></tr></table></figure>
+<h2 id="Git-全局配置"><a href="#Git-全局配置" class="headerlink" title="Git 全局配置"></a>Git 全局配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 查看全局配置信息</div><div class="line">git config -l</div><div class="line"><span class="meta"></span></div><div class="line"># 查看远程地址</div><div class="line">git remote show origin</div><div class="line"><span class="meta"></span></div><div class="line"># 添加远程仓库</div><div class="line">git remote add [git repository]</div><div class="line"><span class="meta"></span></div><div class="line"># 配置用户名，邮箱</div><div class="line">git config --global user.name [user_name]</div><div class="line">git config --global user.email [user_email]  </div><div class="line"><span class="meta"></span></div><div class="line"># 生成SSH密钥对</div><div class="line">ssh-keygen -t rsa -C "$your_email"</div><div class="line"><span class="meta"></span></div><div class="line"># 查看公钥</div><div class="line">cat ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure>
+<p>THE END</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tools/" rel="tag"># tools</a>
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/22/android_listadapter/" rel="next" title="ListAdapter 刷新对事件的阻塞">
+                <i class="fa fa-chevron-left"></i> ListAdapter 刷新对事件的阻塞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="swift2728" />
+          <p class="site-author-name" itemprop="name">swift2728</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-提交步骤"><span class="nav-number">1.</span> <span class="nav-text">Git 提交步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看文件状态"><span class="nav-number">1.1.</span> <span class="nav-text">查看文件状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看修改内容"><span class="nav-number">1.2.</span> <span class="nav-text">查看修改内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暂存提交的文件"><span class="nav-number">1.3.</span> <span class="nav-text">暂存提交的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交已暂存的文件"><span class="nav-number">1.4.</span> <span class="nav-text">提交已暂存的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步到服务器"><span class="nav-number">1.5.</span> <span class="nav-text">同步到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-操作功能"><span class="nav-number">2.</span> <span class="nav-text">Git 操作功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看"><span class="nav-number">2.1.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步"><span class="nav-number">2.2.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">2.3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">2.4.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">2.5.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-实用技巧"><span class="nav-number">3.</span> <span class="nav-text">Git 实用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-checkout"><span class="nav-number">3.1.</span> <span class="nav-text">git checkout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reset"><span class="nav-number">3.2.</span> <span class="nav-text">git reset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名远程分支"><span class="nav-number">3.3.</span> <span class="nav-text">重命名远程分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除远程，本地同步"><span class="nav-number">3.4.</span> <span class="nav-text">删除远程，本地同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-other"><span class="nav-number">3.5.</span> <span class="nav-text">git other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-全局配置"><span class="nav-number">4.</span> <span class="nav-text">Git 全局配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">swift2728</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
