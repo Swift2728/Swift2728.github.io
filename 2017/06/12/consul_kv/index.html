@@ -100,12 +100,12 @@
 <meta property="og:url" content="http://127.0.0.1/2017/06/12/consul_kv/index.html">
 <meta property="og:site_name" content="swift2728">
 <meta property="og:description" content="Consul简单介绍，以及KV存储实现的动态配置">
-<meta property="og:image" content="http://127.0.0.1/consul_kv/consul-arch.png">
-<meta property="og:updated_time" content="2017-06-22T10:23:34.000Z">
+<meta property="og:image" content="http://127.0.0.1/2017/06/12/consul_kv/consul-arch.png">
+<meta property="og:updated_time" content="2017-07-01T08:42:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Consul简介 及 KV存储">
 <meta name="twitter:description" content="Consul简单介绍，以及KV存储实现的动态配置">
-<meta name="twitter:image" content="http://127.0.0.1/consul_kv/consul-arch.png">
+<meta name="twitter:image" content="http://127.0.0.1/2017/06/12/consul_kv/consul-arch.png">
 
 
 
@@ -349,7 +349,7 @@
 
       
         <h2 id="用途及架构"><a href="#用途及架构" class="headerlink" title="用途及架构"></a>用途及架构</h2><p><a href="https://www.consul.io/intro/index.html" target="_blank" rel="external"><code>Consul</code></a> 是一个支持多数据中心、分布式高可用的服务发现和配置共享的软件。包括如下几个部分：<br><code>Service Discovery</code>, <code>Health Checking</code>, <code>KV Store</code>, <code>Multi Datacenter</code>.</p>
-<p><code>Consul Architecture</code><br><img src="/consul_kv/consul-arch.png" alt="Consul arch"></p>
+<p><code>Consul Architecture</code> <img src="/2017/06/12/consul_kv/consul-arch.png" alt="consul arch"></p>
 <h2 id="服务安装、配置"><a href="#服务安装、配置" class="headerlink" title="服务安装、配置"></a>服务安装、配置</h2><p><a href="https://www.consul.io/intro/getting-started/install.html" target="_blank" rel="external">安装和配置文档</a></p>
 <h2 id="Consul-KV"><a href="#Consul-KV" class="headerlink" title="Consul KV"></a>Consul KV</h2><p><code>Values in the KV store cannot be larger than 512kb.</code></p>
 <h3 id="Consul-KV-HTTP-API"><a href="#Consul-KV-HTTP-API" class="headerlink" title="Consul KV HTTP API"></a><a href="https://www.consul.io/api/kv.html" target="_blank" rel="external">Consul KV HTTP API</a></h3><p>使用HTTP请求进行KV操作。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">URL = 'http:localhost:8500'</div><div class="line"><span class="meta">#</span> 1. Read key</div><div class="line">curl URL/v1/kv/my-key </div><div class="line"><span class="meta">#</span># curl localhost:8500/v1/kv/app/123</div><div class="line"><span class="meta"></span></div><div class="line"># 2. Create/Update key</div><div class="line">curl \</div><div class="line">    --request PUT \</div><div class="line">    --data @content \</div><div class="line">    URL/v1/kv/my-key</div><div class="line"><span class="meta">#</span># curl --request PUT --data 'app/123' localhost:8500/v1/kv/app/123    </div><div class="line"><span class="meta"></span></div><div class="line"># 3. Delete key</div><div class="line">curl \</div><div class="line">    --request DELETE</div><div class="line">    URL/v1/kv/my-key</div><div class="line"><span class="meta">#</span># curl --request DELETE localhost:8500/v1/kv/app/123    </div><div class="line"><span class="meta"></span></div><div class="line"># 4. 实用命令</div><div class="line"><span class="meta">#</span># 查询所有的key</div><div class="line">curl URL/v1/kv/?keys</div><div class="line"><span class="meta">#</span># 查询所有指定前缀的key</div><div class="line">curl URL/v1/kv/xx/?keys</div><div class="line"><span class="meta">#</span># 查询指定的key</div><div class="line">curl URL/v1/kv/my-key</div><div class="line"><span class="meta">#</span># 查询所有的key-value</div><div class="line">curl URL/v1/kv/?recurse</div></pre></td></tr></table></figure></p>
